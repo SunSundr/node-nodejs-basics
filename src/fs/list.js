@@ -9,12 +9,12 @@ const msgPrefix = 'FS operation';
 const list = async () => {
     try {
         const files = await fs.readdir(folderPath);
-        console.log(output('green', `${msgPrefix} success`));
+        console.log(output('green', `[Done] ${msgPrefix} success`));
         console.log(`The '${folderPath}' folder contains the ${files.length} files:`);
         files.forEach((file) => console.log(output('cyan', `- ${file}`)));
         console.log('\n');
     } catch (err) {
-        console.error(output('red', `${msgPrefix}:`),  err.message, '\n');
+        console.error(output('red', `[Error] ${msgPrefix} failed:`),  err.message, '\n');
     }
 };
 

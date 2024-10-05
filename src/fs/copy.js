@@ -11,9 +11,9 @@ const copy = async () => {
     try {
         await fs.mkdir(destDir);
         await fs.cp(srcDir, destDir, { recursive: true, force: false, errorOnExist: true });
-        console.log(output('green', `${msgPrefix} success:`),  `folder '${destDir}' has been copied\n`);
+        console.log(output('green', `[Done] ${msgPrefix} success:`),  `folder '${destDir}' has been copied\n`);
     } catch (err) {
-        console.error(output('red', `${msgPrefix} failed:`),  err.message, '\n');
+        console.error(output('red', `[Error] ${msgPrefix} failed:`),  err.message, '\n');
     }
 };
 

@@ -9,9 +9,9 @@ const msgPrefix = 'FS operation';
 const remove = async () => {
     try {
         await fs.unlink(filePath);
-        console.log(output('green', `${msgPrefix} success:`),  `file '${filePath}' has been removed\n`);
+        console.log(output('green', `[Done] ${msgPrefix} success:`),  `file '${filePath}' has been removed\n`);
     } catch (err) {
-        console.error(output('red', `FS operation failed:`),  err.message, '\n');
+        console.error(output('red', `[Error] ${msgPrefix} failed:`),  err.message, '\n');
     }
 };
 

@@ -10,9 +10,9 @@ const msgPrefix = 'FS operation';
 const create = async () => {
     try {
         await fs.writeFile(filePath, fileContent, { flag: 'wx+' });
-        console.log(output('green', `${msgPrefix} success:`),  `file '${filePath}' has been created\n`);
+        console.log(output('green', `[Done] ${msgPrefix} success:`),  `file '${filePath}' has been created\n`);
     } catch (err) {
-        console.error(output('red', `${msgPrefix}:`),  err.code === 'EEXIST' ? 'file already exists' : err.message, '\n');
+        console.error(output('red', `[Error] ${msgPrefix}:`),  err.code === 'EEXIST' ? 'file already exists' : err.message, '\n');
     }
 };
 

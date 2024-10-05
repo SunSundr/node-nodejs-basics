@@ -14,9 +14,9 @@ const rename = async () => {
         if (isExist) throw new Error(`file '${filePathCorrect}' already exists`);
 
         await fs.rename(filePathWrong, filePathCorrect);
-        console.log(output('green', `${msgPrefix} success:`), `file '${path.basename(filePathWrong)}' has been renamed to '${filePathCorrect}'\n`);
+        console.log(output('green', `[Done] ${msgPrefix} success:`), `file '${path.basename(filePathWrong)}' has been renamed to '${filePathCorrect}'\n`);
     } catch (err) {
-        console.error(output('red', `FS operation failed:`), err.message, '\n');
+        console.error(output('red', `[Error] ${msgPrefix} failed:`), err.message, '\n');
     }
 };
 
