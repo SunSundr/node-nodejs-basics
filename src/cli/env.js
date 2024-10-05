@@ -15,7 +15,7 @@ const parseEnv = () => {
 
     if (rssVariables.length) {
         console.log(output('green', `[Done] Environment variables with '${envPrefix}' prefix:`));
-        console.log(output('cyan', rssVariables.join('\n')), '\n');
+        console.log(output('cyan', rssVariables.join('; ')), '\n');
     } else {
         console.log(output('red', `[Error] There are no environment variables with the "${envPrefix}" prefix`));
     }

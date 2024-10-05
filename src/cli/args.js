@@ -12,7 +12,7 @@ const parseArgs = () => {
 
     if (argsResult.length) {
         console.log(output('green', `[Done] Command line arguments:`));
-        console.log(output('cyan', argsResult.join('\n')), '\n');
+        console.log(output('cyan', argsResult.join(', ')), '\n');
     } else {
         console.log(output('red', `[Error] There are no command line arguments`));
     }
