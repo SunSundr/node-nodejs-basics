@@ -17,7 +17,7 @@ const transform = async () => {
     });
 
     process.stdout.write(
-        output('green', `The transform stream is open.\n`) + 
+        output('green', '*** The transform stream is open ***\n') + 
         output('cyan', 'Please click on this terminal window and start typing your input.\n' + 
             `If you enter "${streamEnd}", the stream will end.\n`) +
         '-'.repeat(80) + '\n' + formatPrefix());
@@ -28,15 +28,15 @@ const transform = async () => {
 
 
     reverseStream.on('error', (err) => {
-        console.error('Error transforming input:', err);
+        process.stderr.write(output('red','\n[Error] Transforming input failed:') + err.message + '\n\n');
     });
 
     process.stdin.on('error', (err) => {
-        console.error('Error reading input:', err);
+        process.stderr.write(output('red','\n[Error] Reading input failed:') + err.message + '\n\n');
     });
 
     process.stdout.on('error', (err) => {
-        console.error('Error writing output:', err);
+        process.stderr.write(output('red','\n[Error] Writing output failed:') + err.message + '\n\n');
     });
 
     process.stdin.on('data', (chunk) => {

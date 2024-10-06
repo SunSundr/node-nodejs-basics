@@ -30,7 +30,7 @@ const write = async () => {
     });
     
     writableStream.on('error', (err) => {
-        process.stderr.write(`${output('red', `Error writing to file "${path.basename(filePath)}":`)}\n${err.message}\n\n`);
+        process.stderr.write(`${output('red', `[Error] Writing to file "${path.basename(filePath)}" failed:`)}\n${err.message}\n\n`);
     });
 
     process.stdin.pipe(writableStream);
