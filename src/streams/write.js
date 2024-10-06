@@ -16,18 +16,19 @@ const write = async () => {
         process.stdout.write(
             output('green', `The stream is open for writing to a file "${path.basename(filePath)}"\n`) + 
             output('cyan', 'Please click on this terminal window and start typing your input.\n' +
-            `If you enter "${streamEnd}", the stream will end.\n`
-            ) + '-'.repeat(80) + '\n' + formatPrefix());
+                `If you enter "${streamEnd}", the stream will end.\n`) + 
+            '-'.repeat(80) + '\n' + formatPrefix());
     });
 
     process.stdin.on('data', (chunk) => {
         process.stdout.write(formatPrefix());
         if (chunk.toString().trim() === streamEnd) {
             process.stdin.unpipe(writableStream);
-            process.stdout.write(output('green','\n[Done]\n\n'));
+            process.stdout.write(output('green', '\n[Done]\n\n'));
+            setTimeout(() => writableStream.end());
         }
     });
-
+    
     writableStream.on('error', (err) => {
         process.stderr.write(`${output('red', `Error writing to file "${path.basename(filePath)}":`)}\n${err.message}\n\n`);
     });
