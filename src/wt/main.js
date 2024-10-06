@@ -59,7 +59,7 @@ const performCalculations = async () => {
     console.log(output('cyan', 'Thread results:'))
     console.log(workerResults);
     if (errors.length) {
-        console.log(errors.map((data) => {
+        console.error(errors.map((data) => {
             return `${output('red', '[Error]')} ${data.err.message} (thread: ${data.i + 1})`;
         }).join('\n'));
     }

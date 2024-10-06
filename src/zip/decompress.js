@@ -9,15 +9,6 @@ const inputFilePath = path.join(dirPath, 'archive.gz');
 const outputFilePath = path.join(dirPath, 'fileToCompress.txt');
 
 const decompress = async () => {
-    const deleteOutputFile = async () => {
-        try {
-            await fs.promises.unlink(outputFilePath);
-            console.log(output('yellow', 'The output file has been deleted.\n'));
-        } catch (err) {
-            console.error(output('red', 'Error deleting output file:'), err.message);
-        }
-    };
-
     const gunzip = zlib.createGunzip();
     const source = fs.createReadStream(inputFilePath);
     const destination = fs.createWriteStream(outputFilePath);
@@ -28,6 +19,19 @@ const decompress = async () => {
 
     const isExist = await fs.promises.access(outputFilePath, fs.constants.W_OK).then(() => true).catch(() => false);
     if (isExist) console.log(output('yellow', '[Warn] The output file exists and will be overwritten'));
+
+    const deleteOutputFile = async () => {
+        if (isExist) {
+            console.log();
+            return;
+        }
+        try {
+            await fs.promises.unlink(outputFilePath);
+            console.log(output('yellow', 'The output file has been deleted.\n'));
+        } catch (err) {
+            console.error(output('red', 'Error deleting output file:'), err.message);
+        }
+    };
 
     destination.on('finish', () => {
         console.log(output('cyan', `File '${inputFilePath}' has been decompressed\nto '${outputFilePath}'`));
