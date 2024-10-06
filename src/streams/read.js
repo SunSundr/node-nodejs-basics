@@ -5,7 +5,6 @@ import { output } from './../output.js';
 
 const filePath = path.join(dirname(fileURLToPath(import.meta.url)), 'files', 'fileToRead.txt');
 
-
 const read = async () => {
     const stream = fs.createReadStream(filePath);
     // stream.pipe(process.stdout);
