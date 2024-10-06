@@ -15,7 +15,7 @@ const compress = async () => {
             await fs.promises.unlink(outputFilePath);
             console.log(output('yellow', 'The output file has been deleted.\n'));
         } catch (err) {
-            console.error(output('red', 'Error deleting output file:'), err.message);
+            console.error(output('red', '[Error] Removing the output file failed:'), err.message);
         }
     };
 
@@ -23,9 +23,12 @@ const compress = async () => {
     const source = fs.createReadStream(inputFilePath);
     const destination = fs.createWriteStream(outputFilePath);
 
-    source.pipe(gzip).pipe(destination);
+    console.log(output('green', '*** Compresses file using zlib and Streams API ***\n'));
 
-    console.log(output('green', `Compresses file using zlib and Streams API:`));
+    const isExist = await fs.promises.access(outputFilePath, fs.constants.W_OK).then(() => true).catch(() => false);
+    if (isExist) console.log(output('yellow', '[Warn] The output file exists and will be overwritten'));
+
+    source.pipe(gzip).pipe(destination);
 
     destination.on('finish', () => {
         console.log(output('cyan', `File '${inputFilePath}' has been compressed\nto '${outputFilePath}'`));
@@ -33,17 +36,17 @@ const compress = async () => {
     });
 
     source.on('error', (err) => {
-        console.error(output('red', 'Error reading the input file:'), err.message);
+        console.error(output('red', '[Error] Reading the input file failed:'), err.message);
         deleteOutputFile();
     });
 
     gzip.on('error', (err) => {
-        console.error(output('red', 'Error during compression:'), err.message);
+        console.error(output('red', '[Error] During compression failed:'), err.message);
         deleteOutputFile();
     });
 
     destination.on('error', (err) => {
-        console.error(output('red', 'Error writing the output file:'), err.message);
+        console.error(output('red', '[Error] Writing the output file failed:'), err.message);
         deleteOutputFile();
     });
 };
