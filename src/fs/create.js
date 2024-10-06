@@ -8,12 +8,19 @@ const fileContent = 'I am fresh and young';
 const msgPrefix = 'FS operation';
 
 const create = async () => {
-    try {
-        await fs.writeFile(filePath, fileContent, { flag: 'wx+' });
-        console.log(output('green', `[Done] ${msgPrefix} success:`),  `file '${filePath}' has been created\n`);
-    } catch (err) {
-        console.error(output('red', `[Error] ${msgPrefix}:`),  err.code === 'EEXIST' ? 'file already exists' : err.message, '\n');
-    }
+  try {
+    await fs.writeFile(filePath, fileContent, { flag: 'wx+' });
+    console.log(
+      output('green', `[Done] ${msgPrefix} success:`),
+      `file '${filePath}' has been created\n`
+    );
+  } catch (err) {
+    console.error(
+      output('red', `[Error] ${msgPrefix} failed:`),
+      err.message,
+      '\n'
+    );
+  }
 };
 
 await create();
