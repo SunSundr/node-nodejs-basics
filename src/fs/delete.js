@@ -7,6 +7,8 @@ const filePath = path.join(dirname(fileURLToPath(import.meta.url)), 'files', 'fi
 const msgPrefix = 'FS operation';
 
 const remove = async () => {
+  console.log(output('green', '*** Delete file ***'));
+  console.log('-'.repeat(120));
   try {
     await fs.unlink(filePath);
     console.log(

@@ -8,6 +8,8 @@ const fileContent = 'I am fresh and young';
 const msgPrefix = 'FS operation';
 
 const create = async () => {
+  console.log(output('green', '*** Create file ***'));
+  console.log('-'.repeat(120));
   try {
     await fs.writeFile(filePath, fileContent, { flag: 'wx+' });
     console.log(

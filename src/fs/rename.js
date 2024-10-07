@@ -9,6 +9,8 @@ const filePathCorrect = path.join(dirPath, 'properFilename.md');
 const msgPrefix = 'FS operation';
 
 const rename = async () => {
+  console.log(output('green', '*** Rename file ***'));
+  console.log('-'.repeat(120));
   try {
     const isExist = await fs
       .access(filePathCorrect, fs.constants.F_OK)

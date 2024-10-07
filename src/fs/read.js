@@ -7,6 +7,8 @@ const filePath = path.join(dirname(fileURLToPath(import.meta.url)), 'files', 'fi
 const msgPrefix = 'FS operation';
 
 const read = async () => {
+  console.log(output('green', '*** Read file ***'));
+  console.log('-'.repeat(80));
   try {
     const content = await fs.readFile(filePath, { encoding: 'utf-8' });
     console.log(output('green', `[Done] ${msgPrefix} success`));

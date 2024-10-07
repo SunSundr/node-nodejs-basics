@@ -15,7 +15,8 @@ const decompress = async () => {
 
   source.pipe(gunzip).pipe(destination);
 
-  console.log(output('green', '*** Decompresses file using zlib and Streams API ***\n'));
+  console.log(output('green', '*** Decompresses file using zlib and Streams API ***'));
+  console.log('-'.repeat(70));
 
   const isExist = await fs.promises
     .access(outputFilePath, fs.constants.W_OK)

@@ -11,6 +11,9 @@ const filePath = path.join(
 );
 
 const calculateHash = async () => {
+  console.log(output('green', '*** Calculate the SHA256 hash ***'));
+  console.log('-'.repeat(80));
+
   const hash = crypto.createHash('sha256');
   const stream = fs.createReadStream(filePath);
 

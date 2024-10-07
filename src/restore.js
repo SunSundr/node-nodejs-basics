@@ -14,6 +14,7 @@ const __dirname = dirname(__filename);
 
 const foldersToClean = [
   path.join(__dirname, 'fs', 'files'),
+  path.join(__dirname, 'fs', 'files_copy'),
   path.join(__dirname, 'hash', 'files'),
   path.join(__dirname, 'streams', 'files'),
   path.join(__dirname, 'zip', 'files'),
@@ -25,7 +26,7 @@ const cleanFolder = async (folder) => {
     const fullPath = path.join(folder, item);
     const stats = await fs.stat(fullPath);
     if (stats.isDirectory()) {
-      await cleanFolder(fullPath);
+      await cleanFolder(fullPath);    
     } else {
       try {
         await fs.unlink(fullPath);
@@ -90,7 +91,15 @@ This script allows you to return the project to its original state.'
     }
 
     for (const folder of foldersToClean) {
-      await cleanFolder(folder);
+      if (path.basename(folder) === 'files_copy') {
+        try {
+          await fs.rm(folder, { recursive: true });
+        } catch (err) {
+          // nothing
+        }
+      } else {
+        await cleanFolder(folder);
+      }
     }
 
     const outputFolderPath = path.join(dirname(__dirname), 'src');

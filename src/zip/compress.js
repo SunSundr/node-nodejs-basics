@@ -22,8 +22,9 @@ const compress = async () => {
   const source = fs.createReadStream(inputFilePath);
   const destination = fs.createWriteStream(outputFilePath);
 
-  console.log(output('green', '*** Compresses file using zlib and Streams API ***\n'));
-
+  console.log(output('green', '*** Compresses file using zlib and Streams API ***'));
+  console.log('-'.repeat(70));
+  
   const isExist = await fs.promises
     .access(outputFilePath, fs.constants.W_OK)
     .then(() => true)

@@ -8,6 +8,8 @@ const destDir = `${srcDir}_copy`;
 const msgPrefix = 'FS operation';
 
 const copy = async () => {
+  console.log(output('green', '*** Copy folder ***'));
+  console.log('-'.repeat(120));
   try {
     await fs.mkdir(destDir);
     await fs.cp(srcDir, destDir, { recursive: true, force: false, errorOnExist: true });
