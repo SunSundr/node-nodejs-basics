@@ -10,3 +10,12 @@ const echoInput = (chunk) => {
 };
 
 process.stdin.on('data', echoInput);
+
+// Added only to check IFC-channel:
+//------------------------------------------------------------------
+console.log('\nChecking the functionality of the IFC-channel:')
+console.log('-'.repeat(80));
+process.on('message', (data) => {
+    console.log('Message from parent (master):', data.msg, data.pid);
+    process.send({ msg: 'Data from child process', pid: process.pid });
+});
